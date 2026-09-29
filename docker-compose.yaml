@@ -1,0 +1,18 @@
+services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '127.0.0.1:8090:8080'
+  dbMysql:
+    image: mariadb:10.7
+    restart: always
+    ports:
+      - '127.0.0.1:3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: "dev_root_password"
+      MYSQL_DATABASE: db_explorer
+      MYSQL_USER: db_explorer
+      MYSQL_PASSWORD: "dev_password"
+    volumes:
+      - './_mysql/:/docker-entrypoint-initdb.d/:ro'
